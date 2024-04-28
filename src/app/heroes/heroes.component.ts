@@ -1,35 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, HeroDetailComponent],
+  imports: [CommonModule, FormsModule, RouterLink],
 })
-export class HeroesComponent {
-  heroes:Hero[] = [];
-  selectedHero?: Hero;
+export class HeroesComponent implements OnInit {
+  heroes: Hero[] = [];
 
-  constructor(private heroService:HeroService, private messageService: MessageService){}
-
-  getHeroes(): void {
-    this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
-  }
+  constructor(private heroService: HeroService) {
+    console.log('something')
+   }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes);
   }
 }
