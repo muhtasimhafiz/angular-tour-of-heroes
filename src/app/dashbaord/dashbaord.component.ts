@@ -3,14 +3,15 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HeroSearchComponent } from '../hero-search/hero-search.component';
 
 
 @Component({
-  standalone:true,
+  standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashbaord.component.html',
-  styleUrls: [ './dashbaord.component.css' ],
-  imports:[RouterLink, CommonModule]
+  styleUrls: ['./dashbaord.component.css'],
+  imports: [RouterLink, CommonModule, HeroSearchComponent]
 })
 export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];

@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Adding routes, httpclient, and inMemoryWebApi for global access
+
+
+```import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import {  InMemoryDataService } from "./in-memory-data.service";
+
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes),
+    provideHttpClient(),
+    importProvidersFrom(InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 1000 })),
+  ],
+};```
